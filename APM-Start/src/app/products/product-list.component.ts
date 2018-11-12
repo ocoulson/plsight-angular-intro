@@ -7,7 +7,7 @@ import {IProduct} from './product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit{
-  private _listFilter = '';
+  private _listFilter;
   get listFilter(): string {
     return this._listFilter;
   }
@@ -83,7 +83,7 @@ export class ProductListComponent implements OnInit{
 
   constructor() {
     this.filteredProducts = this.products;
-    this.listFilter = 'cart';
+    this.listFilter = '';
   }
 
   private performFilter(filterBy: string) {
@@ -91,5 +91,8 @@ export class ProductListComponent implements OnInit{
     return this.products.filter((product: IProduct) =>
       product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
+  }
+  onRatingClicked(message: string): void {
+    this.pageTitle = 'Product List: ' + message;
   }
 }
